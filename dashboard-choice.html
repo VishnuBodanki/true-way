@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1d2671, #c33764);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      padding: 30px;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    .quote {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      font-style: italic;
+    }
+    .dashboard-options-row {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 32px 28px;
+      width: 290px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 22px #fff9;
+      background: rgba(255,255,255,0.18);
+    }
+    .card h2 {
+      margin-bottom: 15px;
+      font-size: 1.8em;
+    }
+    .card p {
+      font-size: 1em;
+      line-height: 1.5;
+    }
+    /* App tracker button block */
+    .tracker-btn-wrap {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+    }
+    .tracker-btn {
+      padding: 18px 46px;
+      border: none;
+      outline: none;
+      background: linear-gradient(90deg, #7f53ac 0%, #647dee 100%);
+      color: #fff;
+      font-size: 1.14rem;
+      border-radius: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 16px #54468b3c;
+      letter-spacing: 0.01em;
+      transition: 0.18s;
+    }
+    .tracker-btn:hover {
+      filter: brightness(1.15);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 32px #647dee40;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome 🎓</h1>
+    <p class="quote">"Guiding students and parents towards a brighter future!"</p>
+    <div class="dashboard-options-row">
+      <div class="card" onclick="goStudent()">
+        <h2>👨‍🎓 Student Dashboard</h2>
+        <p>Explore courses, career options,<br/> and guidance for students.</p>
+      </div>
+      <div class="card" onclick="goParent()">
+        <h2>👩‍👦 Parent Dashboard</h2>
+        <p>Discover opportunities,<br/> fee structures, and guidance for your child.</p>
+      </div>
+    </div>
+    <div class="tracker-btn-wrap">
+      <a href="http://localhost:3000/dashboard" target="_blank" rel="noopener noreferrer">
+        <button class="tracker-btn">
+          Open App Tracker / Scholarship Tracker Dashboard 🚀
+        </button>
+      </a>
+    </div>
+  </div>
+  <script>
+    function goStudent() {
+      window.location.href = "index.html"; // student dashboard (already created)
+    }
+    function goParent() {
+      window.location.href = "parent.html"; // parent dashboard (already created)
+    }
+  </script>
+</body>
+</html>

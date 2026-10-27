@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parent Dashboard</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('D:/trueway/parent.png') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    position: relative;
+  }
+  .success-overlay {
+    position: absolute;
+    top: 3%;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+    font-size: 4vw;
+    letter-spacing: .18em;
+    font-weight: bold;
+    color: #ffe066;
+    text-shadow: 2px 6px 16px #222, 0 0 32px #000, 0 2px 24px #8b8007;
+    user-select: none;
+    pointer-events: none;
+  }
+  .container {
+    background: rgba(0,0,0,0.72);
+    padding: 44px 20px 28px 20px;
+    border-radius: 28px;
+    text-align: center;
+    width: 96%;
+    max-width: 1040px;
+    max-height: 93vh;
+    box-shadow: 0 16px 29px rgba(0,0,0,0.44);
+    z-index: 3;
+    position: relative;
+    overflow:auto;
+  }
+  h1 {
+    font-size: 2.2em;
+    margin-bottom: 18px;
+    margin-top: 0;
+    letter-spacing: .08em;
+  }
+  .to-select {
+    margin-bottom: 14px;
+  }
+  .stream-msg {
+    font-size: 1.19em;
+    font-weight: bold;
+    background: rgba(255,255,255,0.09);
+    padding: 13px 10px;
+    margin: 5px auto 7px auto;
+    border-radius: 10px;
+    color: #ffe066;
+    display: none;
+    max-width: 490px;
+  }
+  .option-btn, .back-btn {
+    display: inline-block;
+    margin: 10px 6px 18px 10px;
+    padding: 16px 44px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #fff;
+    background: #2898ad;
+    box-shadow: 0 2px 7px #01323a6b;
+  }
+  .option-btn.selected {
+    background: #ffe066 !important;
+    color: #113343;
+    border: 2px solid #ffe066;
+  }
+  .option-btn:disabled {
+    filter: grayscale(0.38); opacity:.83; cursor: default;
+  }
+  .option-btn:hover, .back-btn:hover {
+    opacity: 0.94;
+    transform: scale(1.03);
+  }
+  .back-btn {
+    background: #e94d55;
+    font-size: 1.08em;
+    padding: 10px 26px;
+    border-radius: 10px;
+    margin-top: 0;
+    margin-bottom: 14px;
+  }
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: center;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+  .card {
+    background: rgba(255,255,255,0.14);
+    padding: 20px 10px 18px 10px;
+    width: 260px;
+    min-height: 118px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1.15em;
+    font-weight: bold;
+    color: #ffe066;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 3px 8px #111a2c30;
+    text-shadow: 1px 1px 6px #000, 0 2px 12px #b98c0f44;
+  }
+  .card:hover {
+    background: rgba(255,255,255,0.26);
+    transform: scale(1.045);
+  }
+  .details {
+    margin-top: 16px;
+    background: rgba(0,0,0,0.83);
+    padding: 22px 16px 22px 16px;
+    border-radius: 17px;
+    display: none;
+    text-align: left;
+    max-height: 62vh;
+    min-height: 80px;
+    overflow-y: auto;
+    color: #fffde7;
+    font-size: 1em;
+  }
+  .details h2 {
+    margin-top: 0;
+    font-size: 1.33em;
+    color: #ffe066;
+    margin-bottom: 8px;
+  }
+  .details ul {
+    margin: 10px 0 20px 30px;
+    padding: 0;
+  }
+  .details b {
+    color: #aafdc4;
+  }
+  .details .section {
+    margin-bottom: 17px;
+    margin-top: 13px;
+    line-height: 1.6em;
+    border-left: 4px solid #ffe06644;
+    padding-left: 15px;
+    font-size: 1.07em;
+  }
+  .details .govt {
+    color: #9de9fa;
+    margin-top: 10px;
+    display:block;
+    margin-bottom: 11px;
+  }
+  .details .jkentrance ul {
+    margin: 10px 0 12px 36px;
+    padding: 0;
+    color: #ffe066;
+  }
+  .details .jkentrance a { color: #ffe066; text-decoration: underline; }
+  .close-btn {
+    display: block;
+    margin: 11px auto 0 auto;
+    padding: 8px 22px;
+    background: #e94d55;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+  }
+  @media(max-width: 900px){
+    .container {padding:8px;}
+    .success-overlay {font-size:7vw;}
+  }
+</style>
+</head>
+<body>
+  <div class="success-overlay">SUCCESS</div>
+  <div class="container">
+    <h1>Parent Dashboard</h1>
+    <div class="to-select" id="selectLevelWrap">
+      <button class="option-btn btn-10" onclick="showCards('10')">Daughter/Son completed 10th</button>
+      <button class="option-btn btn-12" onclick="showCards('12')">Daughter/Son completed 12th</button>
+    </div>
+    <div class="stream-msg" id="streamMsg"></div>
+    <div>
+      <button class="back-btn" id="backBtn" style="display:none;" onclick="backToLevel()">⬅ Back</button>
+    </div>
+    <div class="cards" id="cardsContainer"></div>
+    <div class="details" id="detailsContainer">
+      <h2 id="detailTitle"></h2>
+      <div id="detailText"></div>
+      <button class="close-btn" onclick="closeDetails()">Close</button>
+    </div>
+  </div>
+<script>
+const jkExamsMPC = `<div class="jkentrance"><b>J&K Engineering Tests:</b>
+<ul>
+  <li>JKCET: <a href="https://jkbopee.gov.in/" target="_blank">JKBOPEE (Engineering)</a></li>
+  <li>JKBOSE Board: <a href="https://jkbose.nic.in/" target="_blank">JKBOSE</a></li>
+  <li>JKSSB Tech Jobs: <a href="https://jkssb.nic.in/" target="_blank">JKSSB</a></li>
+  <li>JKPSC Gazetted posts: <a href="https://jkpsc.nic.in/" target="_blank">JKPSC</a></li>
+</ul></div>`;
+const jkExamsPCB = `<div class="jkentrance"><b>Medical/Health Entrances (J&K):</b>
+<ul>
+  <li>MBBS/BDS: <a href="https://jkbopee.gov.in/" target="_blank">JKBOPEE</a> and NEET</li>
+  <li>Govt. Paramedical: <a href="https://jkbopee.gov.in/" target="_blank">JKBOPEE</a></li>
+</ul></div>`;
+const jkExamsArts = `<div class="jkentrance"><b>J&K Exams/Admissions:</b>
+<ul>
+  <li>JKPSC: <a href="https://jkpsc.nic.in/" target="_blank">State Services</a></li>
+  <li>JKSSB: <a href="https://jkssb.nic.in/" target="_blank">JKSSB (Clerical/Teaching/Law)</a></li>
+  <li>CUET: <a href="https://cuet.samarth.ac.in/" target="_blank">CUET-UG</a></li>
+</ul></div>`;
+const jkExamsLaw = `<div class="jkentrance"><b>J&K Law Exams:</b>
+<ul>
+  <li>LLB: <a href="https://www.jammuuniversity.ac.in/department/law" target="_blank">Jammu University Law</a></li>
+  <li>CLAT: <a href="https://consortiumofnlus.ac.in/" target="_blank">All India Law (CLAT)</a></li>
+  <li>JKPSC Legal: <a href="https://jkpsc.nic.in/" target="_blank">JKPSC (Legal posts)</a></li>
+</ul></div>`;
+const jkExamsVoc = `<div class="jkentrance"><b>Vocational/Polytechnic J&K:</b>
+<ul>
+  <li>ITI: <a href="https://iti.nic.in/" target="_blank">State ITI</a></li>
+  <li>JKBOPEE Polytechnic: <a href="https://jkbopee.gov.in/" target="_blank">Polytechnic Entrance</a></li>
+  <li>JKSSB Tech: <a href="https://jkssb.nic.in/" target="_blank">Govt Tech posts</a></li>
+</ul></div>`;
+const jkExamsCivil = `<div class="jkentrance"><b>Civil Services J&K:</b>
+<ul>
+  <li>JKPSC (State Exam): <a href="https://jkpsc.nic.in/" target="_blank">JKPSC</a></li>
+  <li>UPSC CSE (All India): <a href="https://upsc.gov.in/" target="_blank">UPSC</a></li>
+</ul></div>`;
+const jkExamsDef = `<div class="jkentrance"><b>Govt. Defence Recruitments (J&K):</b>
+<ul>
+  <li>Army/Navy/Air Force (Rallies & NDA): <a href="https://joinindianarmy.nic.in/" target="_blank">Indian Army</a> | <a href="https://joinindiannavy.gov.in/" target="_blank">Navy</a> | <a href="https://afcat.cdac.in/" target="_blank">Air Force</a></li>
+  <li>JK Light Infantry Organizer: J&K Army Rally + Central entries</li>
+  <li>JKSSB/JK Police SI: <a href="https://jkssb.nic.in/" target="_blank">JKSSB</a></li>
+</ul></div>`;
+const streams10 = [
+{title:"MPC",text:`<div class="section"><b>What is it?</b> Maths, Physics, Chemistry for engineering, data science, and more.</div>
+<div class="section"><b>Fee Structure:</b> ₹30,000 to 50000 in govt instituion ,30000 to ₹2,00,000 per year (depand upon scholarship and rankings)</div>
+<div class="section"><b>National Exams:</b><br>
+<ul><li>JEE Main/Advanced (IITs, NITs)</li><li>CUET, BITSAT, VITEEE</li></ul>
+<b>Top Colleges in India:</b>
+<ul><li>IIT Bombay, IIT Delhi, IIT Jammu, NIT Srinagar</li></ul>
+<b>J&K Colleges:</b>
+<ul><li>IIT Jammu (Jagti), NIT Srinagar, SMVDU, GCET</li></ul></div>
+${jkExamsMPC}
+<div class="section govt"><b>Govt Jobs:</b> NDA, ISRO, DRDO, Railways, State Engineering, PSU jobs.</div>
+<div class="section"><b>Tip:</b> Strong maths gives multiple career and govt options!</div>
+`},
+{title:"PCB",text:`<div class="section"><b>What is it?</b> Physics, Chemistry, Biology - medical, research careers.</div>
+<div class="section"><b>Fee Structure:</b> ₹35,000 to 7,50,000 per year in govt instituions, 70000 to 300000 lak per year(based up on the rank)</div>
+<div class="section"><b>National Exams:</b><ul><li>NEET, AIIMS MBBS, JIPMER</li></ul>
+<b>Colleges:</b>
+<ul><li>AIIMS, GMC Jammu/Srinagar, SKIMS</li></ul></div>
+${jkExamsPCB}
+<div class="section govt"><b>Govt Jobs:</b> Medical Officer, State Health, Scientist (Research), Paramedical staff.</div>
+<div class="section"><b>Tip:</b> Biology leads to medicine, research, pharma & biotech jobs.</div>
+`},
+{title:"Arts",text:`<div class="section"><b>What is it?</b> Humanities: Literature, Law, Civil Services etc.</div>
+<div class="section"><b>Fee Structure:</b> ₹18,000 to ₹70,000 per year</div>
+<div class="section"><b>Exams:</b> CUET, CLAT, NIFT/NID
+<br><b>Colleges:</b><ul><li>University of Jammu, University of Kashmir, Cluster Universities</li></ul></div>
+${jkExamsArts}
+<div class="section govt"><b>Govt Jobs:</b> Civil Services, Education, Law, JKPSC, Police.</div>
+<div class="section"><b>Tip:</b> Best stream for UPSC, law/teaching/creative fields.</div>
+`},
+{title:"Vocational",text:`<div class="section"><b>What is it?</b> Skill/Polytechnic, ITI, Agriculture etc.</div>
+<div class="section"><b>Fee Structure:</b> ₹12,000 to ₹40,000 per year</div>
+<div class="section"><b>Institutes:</b><ul><li>Govt Polytechnic Jammu/Srinagar, ITI colleges</li></ul></div>
+${jkExamsVoc}
+<div class="section govt"><b>Govt Jobs:</b> Technicians, Technologists, JKSSB posts, NRHM, DRDO, Railways.</div>
+<div class="section"><b>Tip:</b> Many skill jobs in govt/private sector for vocational students.</div>
+`}
+];
+const streams12 = [
+{title:"Engineering (MPC)", text:`<div class="section"><b>What is it?</b> B.Tech/B.E. in Comp, Mech, Civil, ECE, EEE, AI etc.</div>
+<div class="section"><b>Fee Structure:</b>free for if qualified in state entrance test, ₹60,000 to ₹2,20,000 per year(based up on the rank and scholarship)</div>
+<div class="section"><b>Major Exams:</b> JEE Main/Adv, JKCET, CUET, BITSAT</div>
+<div class="section"><b>Top Colleges:</b>
+<ul><li>IIT Jammu, NIT Srinagar, SMVDU, GCET Jammu, MIET Jammu</li>
+<li>IIT Bombay/Delhi, NIT Warangal, BITS Pilani</li></ul></div>
+${jkExamsMPC}
+<div class="section govt"><b>Govt Jobs:</b> Engineering Services (UPSC, JKPSC), PSUs, ISRO, DRDO, State Engg depts, Indian Railways.</div>
+<div class="section"><b>Tip:</b> Prepare for JEE/State exams from 11th; huge private/govt demand.</div>
+`},
+{title:"Medical/Health", text:`<div class="section"><b>What is it?</b> MBBS, BDS, BPharm, Nursing, Paramedical, BioTech.</div>
+<div class="section"><b>Fee Structure:</b> ₹50,000 to ₹2,00,000(govt instituions)per / yr (varies in priviate universites based up on rankings)</div>
+<div class="section"><b>Major Exams:</b> NEET, JKCET (Allied/Pharma), JKBOPEE Nursing</div>
+<div class="section"><b>Top Colleges:</b>
+<ul><li>GMC Jammu/Srinagar, AIIMS, SKIMS, GMC Anantnag</li></ul></div>
+${jkExamsPCB}
+<div class="section govt"><b>Govt Jobs:</b> State Doctor, Health Officer, Army Medical, NRHM, Scientist.</div>
+<div class="section"><b>Tip:</b> Medicine is highly competitive; start NEET prep in 11th.</div>
+`},
+{title:"Fashion & Design", text:`<div class="section"><b>What is it?</b> B.Des, Fashion Design, Visual, Product, Animation.</div>
+<div class="section"><b>Fee Structure:</b> ₹40,000 to ₹1,40,000/yr</div>
+<div class="section"><b>Major Exams:</b> NIFT, NID, UCEED, CUET</div>
+<div class="section"><b>Top Colleges:</b>
+<ul><li>NIFT Srinagar, NID Ahmedabad, IITs (for Design), Univ. of Jammu/Kashmir (BFA)</li></ul></div>
+${jkExamsArts}
+<div class="section govt"><b>Govt Jobs:</b> JKSSB, State Design, Govt Art board, Central Design depts.</div>
+<div class="section"><b>Tip:</b> NIFT/NID/Govt jobs require portfolio + entrance exam; start early!</div>
+`},
+{title:"Management", text:`<div class="section"><b>What is it?</b> BBA, Hotel/Tourism, MBA, Retail, Sports/Event Mgmt</div>
+<div class="section"><b>Fee Structure:</b> ₹30,000 to ₹1,00,000/yr (varies in private universities) </div>
+<div class="section"><b>Major Exams:</b> CUET, IPMAT (IIM), SNAP, NMAT</div>
+<div class="section"><b>Top Colleges:</b>
+<ul><li>Univ. of Jammu/Kashmir, IIMs (IPM), SMVDU, IHM</li></ul></div>
+${jkExamsArts}
+<div class="section govt"><b>Govt Jobs:</b> JK Tourism, FCI Manager, PSUs, Academic admin posts.</div>
+<div class="section"><b>Tip:</b> For IIM/integrated MBA start prep for entrance test after 10th.</div>
+`},
+{title:"Defence (Army/Navy/Air Force)", text:`<div class="section"><b>What is it?</b> NDA, CDS, Tech/Non-Tech Army, Navy, Airforce careers.</div>
+<div class="section"><b>Fee Structure:</b> ₹20k-₹80k/yr (preps, hostels etc)</div>
+<div class="section"><b>Major Exams:</b> NDA, CDS, AFCAT, Indian Navy SSR, Army rally</div>
+<div class="section"><b>Top Colleges/Prep:</b>
+<ul><li>NDA Pune, Sainik Schools, JK Army/Navy Rallies</li></ul></div>
+${jkExamsDef}
+<div class="section govt"><b>Govt Jobs:</b> All ranks in Army, Navy, Air Force, State Police/Para Mil.</div>
+<div class="section"><b>Tip:</b> Physical fitness & written test key for all forces! Youth quotas for J&K.</div>
+`},
+{title:"Law & Legal", text:`<div class="section"><b>What is it?</b> 5-yr LLB (after 12th) for Advocate, Judicial, Legal Officer.</div>
+<div class="section"><b>Fee Structure:</b> ₹25k-₹1L/yr varies based on entrance test rankings</div>
+<div class="section"><b>Major Exams:</b> CLAT, Univ. of Jammu Law, NLU Srinagar, CUET Law</div>
+<div class="section"><b>Top Colleges:</b>
+<ul><li>NLU Srinagar, Univ. of Jammu Law, Univ. of Kashmir Law, NLU Delhi (CLAT/AILET)</li></ul></div>
+${jkExamsLaw}
+<div class="section govt"><b>Govt Jobs:</b> State/Central Law Officer, Judiciary, Advocate, Prosecutor.</div>
+<div class="section"><b>Tip:</b> CLAT is national; other law colleges may have state quotas.</div>
+`},
+{title:"Civil Services", text:`<div class="section"><b>What is it?</b> Careers in IAS, IPS, IRS, JKAS, KAS, Administrative posts.</div>
+<div class="section"><b>Fee Structure:</b> ₹15,000 to ₹90,000/yr (BA/BSc or graduation)</div>
+<div class="section"><b>Major Exams:</b> UPSC CSE, JKPSC CCE</div>
+<div class="section"><b>Top Colleges:</b>
+<ul><li>Any Degree College, Cluster/Univ of Jammu/Kashmir</li></ul></div>
+${jkExamsCivil}
+<div class="section govt"><b>Govt Jobs:</b> All-India/State civil services & allied posts.</div>
+<div class="section"><b>Tip:</b> Any stream eligible for CSE/JKPSC after graduation.</div>
+`},
+{title:"Arts & Humanities", text:`<div class="section"><b>What is it?</b> BA History, Sociology, Psychology, PolSci, English, Journalism</div>
+<div class="section"><b>Fee Structure:</b> ₹17,000 to ₹56,000/yr</div>
+<div class="section"><b>Major Exams:</b> CUET, DU, JU, KU</div>
+<div class="section"><b>Top Colleges:</b>
+<ul><li>Univ. of Jammu/Kashmir, Degree Colleges, CUS, Cluster</li></ul></div>
+${jkExamsArts}
+<div class="section govt"><b>Govt Jobs:</b> Education, Civil Services, JKSSB (Info, Academic), PSU.</div>
+<div class="section"><b>Tip:</b> Many toppers in IAS, Law, Politics have arts backgrounds!</div>
+`},
+{title:"Commerce", text:`<div class="section"><b>What is it?</b> B.Com, BBA, Economics, Company Sec, CA/CS/CMA</div>
+<div class="section"><b>Fee Structure:</b> ₹18,000 to ₹70,000/yr</div>
+<div class="section"><b>Major Exams:</b> CUET, CA, ICSI-CS, DU, JU/KU</div>
+<div class="section"><b>Top Colleges:</b>
+<ul><li>JU/KU, Commerce Colleges, Private/Cluster Univ</li></ul></div>
+${jkExamsArts}
+<div class="section govt"><b>Govt Jobs:</b> Finance Officer, Bank Manager, JKSSB/State finance jobs, Accountant.</div>
+<div class="section"><b>Tip:</b> Many banking, accountancy, tax & admin posts regularly open.</div>
+`},
+{title:"Banking & Finance", text:`<div class="section"><b>What is it?</b> B.Com, Banking/Finance, Actuary, Investment/Insurance</div>
+<div class="section"><b>Fee Structure:</b> ₹20,000 to ₹75,000/yr</div>
+<div class="section"><b>Major Exams:</b> CUET, IBPS-PO, CA, CFA, UPSC/JKSSB Finance</div>
+<div class="section"><b>Top Colleges:</b>
+<ul><li>JU/KU, National/Cluster/Private colleges, CUS</li></ul></div>
+${jkExamsArts}
+<div class="section govt"><b>Govt Jobs:</b> RBI, JK Bank, Account Officer, Fiscal Services, Insurance.</div>
+<div class="section"><b>Tip:</b> Prepare for IBPS/SSC for all-India/state banking posts.</div>
+`},
+{title:"Vocational/Skilled", text:`<div class="section"><b>What is it?</b> Skill-based trades: ITI, Polytechnic, Hospitality, Aviation</div>
+<div class="section"><b>Fee Structure:</b> ₹15,000 to ₹45,000/yr</div>
+<div class="section"><b>Major Exams:</b> JKBOPEE (Polytechnic/Skill), ITI entrance, Hotel Mgmt</div>
+<div class="section"><b>Top Institutes:</b>
+<ul><li>J&K Govt Polytechnics, ITIs, Skill Centres</li></ul></div>
+${jkExamsVoc}
+<div class="section govt"><b>Govt Jobs:</b> JE, Technical, Lab Technician, Skill Council, BSNL, Railways, ONGC.</div>
+<div class="section"><b>Tip:</b> Skill sector is growing—many new trades and state jobs!</div>
+`}
+];
+
+
+let currentLevel = null;
+let lastSelectedStreamIdx = null;
+function showCards(level) {
+  currentLevel = level;
+  lastSelectedStreamIdx = null;
+  document.getElementById('detailsContainer').style.display = "none";
+  const cardsEl = document.getElementById('cardsContainer');
+  cardsEl.innerHTML = "";
+  document.querySelector('.btn-10').style.display = (level=="10") ? "inline-block": "none";
+  document.querySelector('.btn-12').style.display = (level=="12") ? "inline-block": "none";
+  document.querySelector('.btn-10').classList.toggle('selected',level=="10");
+  document.querySelector('.btn-12').classList.toggle('selected',level=="12");
+  document.getElementById('backBtn').style.display = "inline-block";
+  const msgDiv = document.getElementById('streamMsg');
+  msgDiv.style.display = "block";
+  msgDiv.innerHTML = level=='10'
+    ? "Choose stream after 10th for your daughter or son:"
+    : "Choose stream after 12th for your daughter or son:";
+  const streams = (level=='10') ? streams10 : streams12;
+  cardsEl.style.display = 'flex';
+  streams.forEach((s, idx)=>{
+    let c = document.createElement('div');
+    c.className = 'card';
+    c.innerHTML = `<span>${s.title}</span>`;
+    c.onclick = () => showDetails(s.title, s.text, idx);
+    cardsEl.appendChild(c);
+  });
+}
+function showDetails(title, text, streamIdx){
+  const cardsEl = document.getElementById('cardsContainer');
+  cardsEl.innerHTML = "";
+  lastSelectedStreamIdx = streamIdx;
+  let activeBtn = document.createElement('button');
+  activeBtn.className = 'option-btn selected';
+  activeBtn.style.marginBottom = '22px';
+  activeBtn.textContent = title;
+  activeBtn.disabled = true;
+  cardsEl.appendChild(activeBtn);
+  document.getElementById('detailTitle').textContent = title;
+  document.getElementById('detailText').innerHTML = text;
+  document.getElementById('detailsContainer').style.display = 'block';
+  document.getElementById('streamMsg').style.display = "none";
+}
+function closeDetails(){
+  document.getElementById('detailsContainer').style.display = 'none';
+}
+function backToLevel(){
+  document.getElementById('detailsContainer').style.display = "none";
+  document.getElementById('cardsContainer').style.display = "none";
+  document.getElementById('backBtn').style.display = "none";
+  document.getElementById('streamMsg').style.display = "none";
+  document.querySelector('.btn-10').style.display = "inline-block";
+  document.querySelector('.btn-12').style.display = "inline-block";
+  document.querySelector('.btn-10').classList.remove('selected');
+  document.querySelector('.btn-12').classList.remove('selected');
+}
+</script>
+</body>
+</html>

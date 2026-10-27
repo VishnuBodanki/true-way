@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Career Guidance - Main</title>
+  <link rel="stylesheet" href="style.css"> <!-- keep your existing style -->
+  <script>
+    // ---------- LOGIN CHECK (clean) ----------
+    // This checks only that a user is logged in (userName & userEmail present).
+    // If not present — redirect to login.html (relative).
+    document.addEventListener("DOMContentLoaded", function () {
+      const userName = localStorage.getItem("userName");
+      const userEmail = localStorage.getItem("userEmail");
+      if (!userName || !userEmail) {
+        // not logged in
+        alert("Please login first.");
+        window.location.href = "login.html";
+      }
+      // optional: display a welcome (remove if unwanted)
+      // console.log("Logged in as", userName, userEmail);
+    });
+  </script>
+</head>
+<body>
+  <h1>Career Guidance</h1>
+
+  <!-- Logout button -->
+  <div style="text-align:right; margin:10px;">
+    <button id="logoutBtn" style="padding:6px 12px; background:#b23a3a; color:white; border:none; border-radius:5px; cursor:pointer;">
+      Logout
+    </button>
+  </div>
+
+  <!-- main buttons (keep your structure / ids) -->
+  <div class="button-container" id="main-buttons">
+    <button onclick="showStreams('10th')">10th</button>
+    <button onclick="showStreams('12th')">12th</button>
+  </div>
+
+  <div id="streams" style="display:none;"></div>
+  <button class="back-btn" onclick="goBack()" style="display:none;">⬅ Back</button>
+
+  <!-- load your existing script (make sure script.js exists in same folder) -->
+  <script src="script.js"></script>
+
+  <script>  
+    // logout clears the saved login and sends back to login page
+    document.getElementById("logoutBtn").addEventListener("click", function(){
+      localStorage.removeItem("userName");
+      localStorage.removeItem("userEmail");
+      // optional: keep registered user stored — we clear session only
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>
+ 

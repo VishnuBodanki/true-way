@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Career Path Finder - Login / Register</title>
+  <style>
+    body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ff6aae 0%, #5b6be6 100%);
+  font-family: Arial, sans-serif;
+ } 
+
+    .top-heading {
+      margin-top: 34px;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .top-heading h1 {
+      color: #fff;
+      letter-spacing: 1.8px;
+      font-size: 2.32em;
+      margin-bottom: 5px;
+      text-shadow: 0 3px 24px rgba(35, 71, 180, 0.16);
+    }
+    .top-heading .tag {
+      color: #ffee94;
+      font-size: 1.13em;
+      letter-spacing: 0.05em;
+      text-shadow: 0 2px 12px #4ca 0.19;
+      margin-bottom: 12px;
+    }
+    .box {
+      width: 380px;
+      background: #fff;
+      padding: 26px 24px 16px 24px;
+      border-radius: 13px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.23);
+    }
+    h2 {
+      margin: 0 0 14px 0; 
+      text-align: center;
+      color: #345;
+      letter-spacing: .09em;
+      font-size: 1.54em;
+    }
+    input, select {
+      width: 100%; 
+      padding: 12px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc; 
+      border-radius: 6px;
+      font-size: 15px;
+      transition: border 0.2s;
+      background: #f6f8fe;
+    }
+    input:focus {
+      outline: none;
+      border-color: #2575fc;
+      box-shadow: 0 0 6px rgba(37,117,252,0.16);
+      background: #fff;
+    }
+    .row { display: flex; gap: 8px; }
+    button {
+      width: 100%; 
+      padding: 12px; 
+      margin-top: 14px;
+      border: none; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      background: #2575fc; 
+      color: #fff; 
+      font-weight: 600;
+      font-size: 16px;
+      transition: background 0.25s;
+      letter-spacing: .04em;
+    }
+    button:hover {
+      background: #1258d8;
+    }
+    hr {
+      margin: 18px 0;
+      border: none;
+      border-top: 1px solid #eee;
+    }
+    .muted {
+      font-size: 13px; 
+      color: #666; 
+      text-align: center; 
+      margin-top: 10px;
+      line-height: 1.5em;
+    }
+    .link {
+      color: #2575fc; 
+      cursor: pointer; 
+      text-decoration: underline;
+      font-weight: bold;
+    }
+    .error {
+      color: #b00020; 
+      text-align: center; 
+      display: none; 
+      margin-top: 10px; 
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .forgot-row {
+      text-align: right; margin: 2px 3px 0 0;
+      font-size: 13px;
+      color: #2277eb;
+      cursor: pointer;
+      text-decoration: underline;
+      display: block;
+    }
+    @media (max-width:500px) { .box{width:96vw;} .top-heading{margin-top:9vw;} }
+  </style>
+</head>
+<body>
+  <div class="top-heading">
+    <h1>Career Path Finder</h1>
+    <div class="tag">Empowering Parents & Students for Bright Futures</div>
+  </div>
+  <div class="box">
+    <h2>Welcome — Login / Register</h2>
+    <input id="regName" placeholder="Your name (for sign-up)" autocomplete="name"/>
+    <input id="regEmail" placeholder="Your email (for sign-up)" autocomplete="email"/>
+    <input id="regPass" placeholder="Choose a password" type="password" autocomplete="new-password"/>
+    <button id="btnRegister">Sign Up (Register)</button>
+    <hr>
+    <input id="loginEmail" placeholder="Email to login" autocomplete="username email"/>
+    <input id="loginPass" placeholder="Password" type="password" autocomplete="current-password"/>
+    <span class="forgot-row" onclick="forgotPass()">Forgot password?</span>
+    <button id="btnLogin">Login</button>
+    <div class="error" id="err">❌ Invalid credentials or email format. Please try again.</div>
+    <p class="muted">
+      If you are the admin use <strong>admin / 12345</strong>
+    </p>
+    <p class="muted">
+      Open <span class="link" onclick="openMain()">main page</span> (if already logged in)
+    </p>
+  </div>
+  <script>
+    const btnRegister = document.getElementById("btnRegister");
+    const btnLogin = document.getElementById("btnLogin");
+    const errDiv = document.getElementById("err");
+    function validEmail(email) {
+      return /^[\w\.-]+@[\w\.-]+\.\w+$/.test(email);
+
+    }
+    btnRegister.addEventListener("click", () => {
+      const name = document.getElementById("regName").value.trim();
+      const email = document.getElementById("regEmail").value.trim().toLowerCase();
+      const pass = document.getElementById("regPass").value;
+      if (!name || !email || !pass) {
+        alert("Please fill name, email and password to register.");
+        return;
+      }
+      if (!validEmail(email)) {
+        alert("Please enter a valid email address for registration.");
+        return;
+      }
+      localStorage.setItem("registeredName", name);
+      localStorage.setItem("registeredEmail", email);
+      localStorage.setItem("registeredPass", pass);
+      alert("Registered successfully. Now use the login form below.");
+      document.getElementById("regName").value = "";
+      document.getElementById("regEmail").value = "";
+      document.getElementById("regPass").value = "";
+    });
+    btnLogin.addEventListener("click", () => {
+      errDiv.style.display = "none";
+      const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+      const pass = document.getElementById("loginPass").value;
+      if (!email || !pass) {
+        alert("Please enter email and password to login.");
+        return;
+      }
+      if (email !== "admin" && !validEmail(email)) {
+        errDiv.innerText = "❌ Invalid email format.";
+        errDiv.style.display = "block";
+        return;
+      }
+      const ADMIN_EMAIL = "admin";
+      const ADMIN_PASS = "12345";
+      const regEmail = localStorage.getItem("registeredEmail");
+      const regPass = localStorage.getItem("registeredPass");
+      const regName = localStorage.getItem("registeredName");
+      const isAdmin = (email === ADMIN_EMAIL && pass === ADMIN_PASS);
+      const isRegistered = (regEmail && regPass && email === regEmail && pass === regPass);
+      if (isAdmin || isRegistered) {
+        const chosenName = isAdmin ? "Administrator" : (regName || email.split("@")[0]);
+        localStorage.setItem("userName", chosenName);
+        localStorage.setItem("userEmail", email);
+        window.location.href = "dashboard-choice.html";
+        return;
+      }
+      errDiv.innerText = "❌ Invalid credentials or email. Please try again.";
+      errDiv.style.display = "block";
+    });
+    function openMain(){
+      const name = localStorage.getItem("userName");
+      const email = localStorage.getItem("userEmail");
+      if(name && email){
+        window.location.href = "dashboard-choice.html";
+      } else {
+        alert("Not logged in yet. Please login first.");
+      }
+    }
+    function forgotPass() {
+      const regEmail = localStorage.getItem("registeredEmail");
+      const regPass = localStorage.getItem("registeredPass");
+      const em = prompt("Enter your registered email:");
+      if (!em) return;
+      if (!validEmail(em.trim().toLowerCase())) {
+        alert("Please enter a valid registered email address.");
+        return;
+      }
+      if (regEmail && em.trim().toLowerCase() === regEmail) {
+        alert("Your registered password: " + (regPass || "[set during registration]"));
+      } else {
+        alert("Email not found. Please use the email you registered with.");
+      }
+    }
+  </script>
+</body>
+</html>
