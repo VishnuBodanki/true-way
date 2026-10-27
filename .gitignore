@@ -25,3 +25,7 @@ npm-debug.log*
 .git-backup/
 **/.git/
 **/.git-backup/
+
+# Large video files
+study plan of dbms/dance_onam.mp4
+study plan of dbms/aa2.0.mp4
